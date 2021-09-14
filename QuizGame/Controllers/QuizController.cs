@@ -13,8 +13,25 @@ namespace QuizGame.Controllers
             return View();
         }
 
-        public IActionResult GetQuestion()
+        public IActionResult StartQuiz()
         {
+            return View();
+        }
+
+        public IActionResult ViewScores()
+        {
+            return View();
+        }
+
+        public IActionResult ViewHighScores()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> GetQuestion()
+        {
+            // Request API to get question
+
             return View();
         }
 
