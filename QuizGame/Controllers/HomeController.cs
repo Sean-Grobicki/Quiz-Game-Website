@@ -23,15 +23,33 @@ namespace QuizGame.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Login()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+        public IActionResult Login(User user)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            // Search the database for username and password that match
+            // Retrive their attempts data
+            // Return login data with that.
+            return RedirectToAction("Index", "Quiz" ,user);
         }
+
+        [HttpPost]
+        public IActionResult CreateAccount(User user)
+        {
+            // Search the database for username and password that match
+            // Retrive their attempts data
+            // Return login data with that.
+            return RedirectToAction("Index", "Quiz", user);
+        }
+
+        public IActionResult CreateAccount()
+        {
+            return View();
+        }
+
     }
 }

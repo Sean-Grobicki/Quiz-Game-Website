@@ -3,36 +3,39 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using QuizGame.Models;
 
 namespace QuizGame.Controllers
 {
     public class QuizController : Controller
     {
-        public IActionResult Index()
+
+        public IActionResult Index(User user)
         {
             return View();
         }
 
         public IActionResult StartQuiz()
         {
-            return View();
+            return RedirectToAction("Question","Quiz");
         }
 
-        public IActionResult ViewScores()
+        public IActionResult YourScores()
         {
             return View();
         }
 
-        public IActionResult ViewHighScores()
+        public IActionResult HighScores()
         {
             return View();
         }
 
-        public async Task<IActionResult> GetQuestion()
+        public IActionResult Question()
         {
             // Request API to get question
-
-            return View();
+            Question question = new Question();
+            question.questionNumber = 1;
+            return View("Question",question);
         }
 
     }

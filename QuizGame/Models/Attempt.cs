@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 namespace QuizGame.Models
 {
-    public class Question
+    public class Attempt
     {
-        public APIQuestion question { get; set; }
-        public int questionNumber { get; set; }
+        public int score { get; set; }
+
+        public int questionsAnswered { get; set; }
+
     }
 }
