@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace QuizGame.Models
 {
     public class APIQuestion
@@ -16,5 +17,6 @@ namespace QuizGame.Models
 
         public string correct_answer { get; set; }
         public string[] incorrect_answers { get; set; }
+
     }
 }

@@ -10,7 +10,7 @@ namespace QuizGame.Models
         public string username { get; set; }
         public string password { get; set; }
 
-        List<Attempt> attempts { get; set; }
+        public List<Attempt> attempts { get; set; }
 
     }
 }

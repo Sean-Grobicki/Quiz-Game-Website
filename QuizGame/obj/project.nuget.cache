@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Fy/BycB4uB4LWJAQdKvxFdn6vUir2tuzutmKy/9Wj1jV4FvNS8yH13Y+qbmfn4jwlZKiz93U5gTWNsxcxGDUvw==",
+  "dgSpecHash": "Ys+PM6sEWVVsCwgHqFY1mtWnnLkSw8TrP1eKXpOowaEkjxup9aXsd+jdvxqCDxdHEYenwos1ZpNQO/0EtjBprA==",
   "success": true,
   "projectFilePath": "C:\\Users\\seang\\Documents\\Storage\\Quiz Game\\QuizGame\\QuizGame.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\seang\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

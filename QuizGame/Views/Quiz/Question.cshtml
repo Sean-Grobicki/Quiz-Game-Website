@@ -1,7 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Question "+ Model.questionNumber;
+    string[] answers =  Model.getAnswers();
+
+
 }
 
 <div class="text-center">
     <h1 class="display-4">Question @Model.questionNumber</h1>
+    @Model.getDecodedQuestion()
+    <div class="answer-container">
+        @using (Html.BeginForm("AnswerQuestion", "Quiz", FormMethod.Post, new { @class = "answer-container" }))
+        {
+            @model Answer
+           
+            @answers[0] @Html.RadioButtonFor(m => m.theirAnswer, answers[0], new { @class = "answer-button" })
+            @answers[1] @Html.RadioButtonFor(m => m.theirAnswer, answers[1], new { @class = "answer-button" })
+            @answers[2] @Html.RadioButtonFor(m => m.theirAnswer, answers[2], new { @class = "answer-button" })
+            @answers[3] @Html.RadioButtonFor(m => m.theirAnswer, answers[3], new { @class = "answer-button" })
+            <button type="submit">Submit Answer</button>
+        }
+    </div>
 </div>

@@ -88,3 +88,14 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
 }
+
+.answer-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.answer-button {
+    width: 100%;
+    visibility: visible;
+    color: black;
+}
