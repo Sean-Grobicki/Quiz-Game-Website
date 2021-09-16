@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Net.Http;
+
 using QuizGame.Models;
 using Newtonsoft.Json;
 using System.Web;
@@ -13,8 +13,6 @@ namespace QuizGame.Controllers
     public class QuizController : Controller
     {
 
-        private HttpClient _client = new HttpClient();
-
         public IActionResult Index(User user)
         {
             return View();
@@ -22,7 +20,9 @@ namespace QuizGame.Controllers
 
         public IActionResult StartQuiz()
         {
-            return RedirectToAction("Question","Quiz");
+            // Maybe create Attempt here and then pass that to current question.
+            Attempt attempt = new Attempt();
+            return RedirectToAction("Question","Quiz",attempt);
         }
 
         public IActionResult YourScores()
@@ -35,27 +35,24 @@ namespace QuizGame.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Question()
+        public async Task<IActionResult> Question(Attempt attempt)
         {
             // Request API to get question
-            _client.BaseAddress = new Uri(Environment.GetEnvironmentVariable("SERVER_ADDRESS"));
-            string serialisedJson = await _client.GetStringAsync($"?amount=1&type=multiple");
-            APIResponse response = JsonConvert.DeserializeObject<APIResponse>(serialisedJson);
-            Question question = new Question();
-            question.questionNumber = 1;
-            question.question = response.results[0];
-            return View("Question",question);
+            attempt.increaseQuestionNumber();
+            attempt.currentQuestion = await attempt.getNewQuestion();
+            return View("Question",attempt);
         }
 
 
         [HttpPost]
-        public IActionResult AnswerQuestion(Answer ans)
+        public IActionResult AnswerQuestion(Attempt attempt)
         {
-            if (ans.theirAnswer == )
+            if (attempt.currentQuestion.theirAnswer == attempt.currentQuestion.question.correct_answer)
             {
-                return View("Correct");
+                attempt.increaseScore();
+                return View("Correct",attempt);
             }
-            return View("Incorrect");
+            return View("Incorrect",attempt);
         }
 
     }

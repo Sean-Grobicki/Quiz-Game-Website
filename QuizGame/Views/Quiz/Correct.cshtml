@@ -5,6 +5,15 @@
 <div class="text-center">
     <h1 class="display-4">Correct</h1>
 
+    Score: @Model.score.score
+    Questions Answered: @Model.score.questionNumber
 
+    @using (Html.BeginForm("Question", "Quiz", FormMethod.Post, new { @class = "answer-container" }))
+    {
+        @model Attempt
+        @Html.HiddenFor(m => m.score.questionNumber, Model.score.questionNumber)
+        @Html.HiddenFor(m => m.score.score, Model.score.score)
+        <button type="submit">Next Question</button>
+    }
 </div>
 
