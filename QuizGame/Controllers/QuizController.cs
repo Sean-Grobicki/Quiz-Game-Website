@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using QuizGame.Models;
 using Newtonsoft.Json;
 using System.Web;
@@ -22,7 +21,9 @@ namespace QuizGame.Controllers
         {
             // Maybe create Attempt here and then pass that to current question.
             Attempt attempt = new Attempt();
-            return RedirectToAction("Question","Quiz",attempt);
+            attempt.score = new Score();
+            TempData["Attempt"] = JsonConvert.SerializeObject(attempt);
+            return RedirectToAction("Question","Quiz");
         }
 
         public IActionResult YourScores()
@@ -35,12 +36,24 @@ namespace QuizGame.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Question(Attempt attempt)
+        [HttpPost]
+        public IActionResult NextQuestion(Attempt attempt)
         {
-            // Request API to get question
-            attempt.increaseQuestionNumber();
-            attempt.currentQuestion = await attempt.getNewQuestion();
-            return View("Question",attempt);
+            TempData["Attempt"] = JsonConvert.SerializeObject(attempt);
+            return RedirectToAction("Question", "Quiz");
+        }
+
+        public async Task<IActionResult> Question()
+        {
+            if (TempData["Attempt"] != null)
+            {
+                Attempt attempt = JsonConvert.DeserializeObject<Attempt>(TempData["Attempt"].ToString());
+                attempt.increaseQuestionNumber();
+                attempt.currentQuestion = await attempt.getNewQuestion();
+                return View("Question", attempt);
+            }
+            //Change this to an error view.
+            return View("Index");
         }
 
 
@@ -50,10 +63,17 @@ namespace QuizGame.Controllers
             if (attempt.currentQuestion.theirAnswer == attempt.currentQuestion.question.correct_answer)
             {
                 attempt.increaseScore();
+                ModelState.Clear();
                 return View("Correct",attempt);
             }
             return View("Incorrect",attempt);
         }
 
+        [HttpPost]
+
+        public IActionResult SaveScore(Attempt attempt)
+        {
+            return RedirectToAction("Index", "Quiz");
+        }
     }
 }

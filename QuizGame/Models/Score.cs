@@ -11,11 +11,11 @@ namespace QuizGame.Models
         public int score { get; set; }
         public int questionNumber { get; set; }
 
+
         public Score()
         {
             score = 0;
             questionNumber = 0;
-
         }
     }
 }

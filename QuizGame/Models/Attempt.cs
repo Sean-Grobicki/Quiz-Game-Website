@@ -13,10 +13,6 @@ namespace QuizGame.Models
         public Score score { get; set; }
         public Question currentQuestion { get; set; }
 
-        public Attempt()
-        {
-            score = new Score();
-        }
 
         public async Task<Question> getNewQuestion()
         {
@@ -37,15 +33,15 @@ namespace QuizGame.Models
         {
             if (currentQuestion.question.difficulty == "easy")
             {
-                score.score += 2;
+                score.score = score.score + 2;
             }
             else if (currentQuestion.question.difficulty == "medium")
             {
-                score.score += 5;
+                score.score = score.score + 5;
             }
             else
             {
-                score.score += 10;
+                score.score = score.score + 10;
             }
         }
 

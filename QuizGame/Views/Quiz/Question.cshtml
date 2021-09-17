@@ -4,6 +4,7 @@
 }
 
 <div class="text-center">
+    @Model.currentQuestion.question.difficulty Question
     <h1 class="display-4">Question @Model.score.questionNumber</h1>
     @Model.currentQuestion.getDecodedQuestion()
     <div class="answer-container">
@@ -21,4 +22,5 @@
             <button type="submit">Submit Answer</button>
         }
     </div>
+    Score: @Model.score.score
 </div>
